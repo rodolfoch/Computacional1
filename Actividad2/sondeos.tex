@@ -1,0 +1,263 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Limpieza y preparación de datos usando Emacs}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{08 de Febrero del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logouni}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\hrule 
+\section*{Resumen}
+En esta práctica se hace uso de Emacs para la recopilación de datos sobre las condiciones atmósféricas de la ciudad de México
+\vspace{0.5 cm}
+\hrule
+\vspace{0.9 cm}
+\section*{Introducción}
+El uso del editor de texto Emacs es una herramienta bastante útil para la recopilación y ordenamiento de datos. En esta práctica se hace uso de dicho editor con el fin de obtener y analizar los datos por medio de gráficas sobre las condiciones atmósféricas de una ciudad de interés, en este caso, la Ciudad de México. \\ Este documento contiene información sobre los sondeos realizados en el año 2016, los cuales fueron proporcionados del sitio web de la Universidad de Wyoming. 
+
+\newpage
+\section*{Datos meteorológicos}
+Una método de obtención de información sobre las características de la atmósfera es utilizar lo que se conoce como globo meteorlógico. \\
+Un globo meteorológico o globo sonda es un globo aerostático (específicamente un tipo de globo de gran altitud), que eleva instrumentos en la atmósfera para suministrar información acerca de la presión atmosférica, la temperatura, y la humedad por medio de un pequeño aparato de medida desechable llamado radiosonda.
+\\ 
+\begin{figure}[ht]
+\includegraphics[width=9cm,height=9cm]{globito}
+\centering
+\caption{}
+\end{figure}
+
+
+\newpage
+
+
+% Con el nuevo archivo, con ayuda de los comandos de Linux, construye una tabla que refleje el estado de los datos descargados  (A que hora 00Z, 12Z, etc, hay observaciones y cuantas hay en cada caso; en cuanto a los dias, cuantos datos hay por mes para cada caso).  
+
+\section*{Sondeos atmosféricos del año 2016 de la CDMX}
+A continuación se mostrarán datos recolectados por sondas atmosféricas que se lanzan varias veces al día, de la red de sondeos de Norteamérica. \\
+Los datos fueron recolectados  del Aeropuerto Internacional de la Ciudad de México y organizados por la Universidad de Wyoming.
+
+\vspace{0.5 cm}
+%tabla:
+\centering
+\begin{tabular}{|l | c |r | }
+\hline
+ Mes & 12z & 00z \\ 
+\hline
+Enero & 31 & 21 \\ 
+\hline
+Febrero & 28 & 2 \\
+\hline
+Marzo & 31 & 6 \\
+\hline
+Abril & 29 & 0 \\
+\hline
+Mayo & 29 & 2 \\
+\hline
+Junio & 30 & 0 \\
+\hline
+Julio & 30 & 2 \\
+\hline
+Agosto & 31 & 0 \\
+\hline
+Septiembre & 30 & 18 \\
+\hline
+Octubre & 30 & 28 \\
+\hline
+Noviembre & 28 & 29 \\
+\hline
+Diciembre & 31 & 28 \\
+\hline
+\end{tabular}
+
+\vspace{0.5 cm}
+
+%
+La tabla muestra la cantidad de sondeos realizados por mes y en determinada hora (12Z y 00Z). 
+
+
+
+
+
+\newpage
+
+\subsection*{Uso de datos}
+
+Como se mencionó anteriormente, por medio del globo atmosférico es posible obtener información acerca de la presión atmosférica, la temperatura, y la humedad. Estos datos son utilizados para realizar estudios con el fin de entender y poder predecir los fenómenos físicos que ocurren en la atmósfera.\\
+A continuación se muestran algunas gráficas que fueron realizadas con datos del mes de Febrero del año 2017.
+
+\begin{figure}[ht]
+\includegraphics[width=9cm,height=9cm]{presionvsaltura}
+\centering
+\end{figure}
+De la gráfica se puede apreciar que conforme la altura es menor, la presión  va decreciendo de manera exponencial.
+
+
+\newpage
+\begin{figure}[ht]
+\includegraphics[width=9cm,height=9cm]{temperaturavsaltura}
+\centering
+\end{figure}
+
+De la figura se observa que en cierta altura la temperatura pasa de ir decreciendo a ir creciendo. Esta altura es a lo que se le conoce como tropopausa. \\ 
+La tropopausa es la zona de transición entre la troposfera y la estratosfera. Marca el límite superior de la troposfera, donde la temperatura generalmente decrece con la altura.
+A partir de la tropopausa la temperatura comienza a aumentar debido a la presencia  de ozono y la  interacción con la radiación ultravioleta procedente del sol.
+\newpage
+\section*{\small Obtención de los datos.}
+
+Los datos utilizados fueron obtenidos del sitio web de la universidad de Wyoming : % http://weather.uwyo.edu/upperair/sounding.htm
+
+Para obtener los datos de todo año 2016 se utilizó el siguiente scrip(en emacs):
+
+emacs script1.sh
+
+\begin{verbatim}
+----------------------
+
+# Descarga por mes. Cambiar año de consulta. Ajustar el numero de estacion.
+
+#!/bin/bash
+
+ 
+
+# Despues de editar: chmod 755 script1.sh
+
+# Para ejecutar: ./script1.sh
+
+ 
+
+IFS=":"
+
+LISTM31="01:03:05:07:08:10:12"
+
+#LISTM31="01:03:05:07"
+
+LISTM30="04:06:09:11"
+
+#LISTM30="04:06"
+
+LISTM28="02"
+
+ 
+
+# Script para bajar info por mes. Año 2016, dentro del URL:  YEAR=2015
+
+# Months 31 days
+
+for i in $LISTM31 ; do
+
+    /usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2016&MONTH=$i&FROM=0100&TO=3112&STNM=76692"
+
+       /bin/sleep 5
+
+done
+
+# Months 30 days
+
+for i in $LISTM30 ; do
+
+    /usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2016&MONTH=$i&FROM=0100&TO=3012&STNM=76692"
+
+       /bin/sleep 5
+
+done
+
+# Feb. 28 days
+
+for i in $LISTM28 ; do
+
+    /usr/local/bin/wget "http://weather.uwyo.edu/cgi-bin/sounding?region=naconf&TYPE=TEXT%3ALIST&YEAR=2016&MONTH=$i&FROM=0100&TO=2812&STNM=76692"
+
+       /bin/sleep 5
+
+done
+\end{verbatim}
+\vspace{0.5 cm}
+En donde se le modificó el año y la calve de la ciudad.
+
+Posteriormente se dio permiso de acceso (para poder ejecutar) a través del comando chmod:
+
+chmod 755 script1.sh
+
+
+Una vez que se realizó todo lo anterior fue posible utilizar los datos.
+
+
+
+
+
+
+
+
+
+\renewcommand{\refname}{\section*{Bibliografía}}
+\begin{thebibliography}{9}
+\bibitem{a1}, \textsc{\url{https://es.wikipedia.org/wiki/Tropopausa}}
+
+\bibitem{b1}, \textsc{Figura 1: \url{https://commons.wikimedia.org/wiki/File:Nssl0020.jpg}}
+
+\bibitem{c1}, \textsc{Universidad de Wyoning \url{http://weather.uwyo.edu/upperair/sounding.html}}
+
+%pag 733 del Zemansky fig. 21.28
+%pag 575 giancoli (lineas de campo)
+%pag 651 serway (def de campo electrico)
+\end{thebibliography}
+
+
+
+\end{document}
+
