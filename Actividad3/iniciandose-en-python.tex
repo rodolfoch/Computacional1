@@ -1,0 +1,251 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{subfig}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Iniciándose en Python}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{14 de Febrero del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logouni}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\hrule 
+\section*{Resumen}
+En esta práctica se hace uso de los datos obtenidos del sondeo, con el fin de producir diagramas y gráficas sobre los valores de CAPE y la cantidad de gua precipitable de la ciudad de México.
+\vspace{0.5 cm}
+\hrule
+\vspace{0.9 cm}
+\section*{Introducción}
+La estadística computacional es una herramienta que revela información interesante de un conjunto de datos.
+En esta práctica se hace uso de python con el objetivo de poder analizar los datos del sondeo del año 2016 de la ciudad México.  \\ Estos datos son la cantidad de agua precipitable y CAPE, los cuales son analizados por medio 
+de la estadística computacional, enfocado en números que describen una colección de datos: los valores extremos (mínimo, máximo), la mediana y los cuartiles, que a su vez permiten generar diagramas de caja e histogramas. En este documento se presentan diagramas de caja e histogramas de las cantidades mencionadas anteriormente.
+
+
+\newpage
+Para realizar las gráficas en python se utilizaron los datos del sondeo del año 2016 de la ciudad de México. Los archivos fueron filtrados mediante el comando grep en la terminal:
+
+\begin{verbatim}
+cat sondeos.txt | egrep -i "Observations|CAPE|water"| sed -e "/00Z/,+2d" > 12Zanual.txt
+cat sondeos.txt | egrep -i "Observations|CAPE|water"| sed -e "/12Z/,+2d" > 00Zanual.txt
+cat sondeos.txt | egrep -i "Observations|CAPE|water"| sed -e "/00Z/,+2d" > 12Zanual.txt
+cat 12Zanual.txt | egrep -i "Observations|CAPE|water"| sed -e "/00Z/,+2d" > 12Zanual_1.txt
+cat 12Zanual.txt | egrep -i "Observations|CAPE|water"| sed -e "/18Z/,+2d" > 12Zanual_1.txt
+wc sondeos.txt
+cat 00Zanual.txt | egrep -i "Observations|CAPE|water"| sed -e "/18Z/,+2d" > 
+
+\end{verbatim}
+
+Los archivos filtrados fueron los datos de CAPE y el agua precipitable de todo el año 2016. Dichos datos fueron importados en una tabla en python, de los sondeos realizados a las 00Z y 12Z
+
+
+\begin{figure}[H]
+ \centering
+  \subfloat[00Z]{
+   \label{00Z}
+    \includegraphics[width=0.48\textwidth]{rec00z}}
+  \subfloat[00Z]{
+   \label{00Z}
+    \includegraphics[width=0.48\textwidth]{rec00z_2}}
+    \caption{Datos 00Z}
+\end{figure}
+
+
+\newpage
+
+\begin{figure}[H]
+ \centering
+  \subfloat[12Z]{
+   \label{00Z}
+    \includegraphics[width=0.48\textwidth]{rek12z}}
+  \subfloat[12Z]{
+   \label{00Z}
+    \includegraphics[width=0.48\textwidth]{rek12z_2}}
+    \caption{Datos 12Z}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%GRAFICAS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section*{CAPE}
+
+ La energía potencial convectiva disponible (EPCD, o CAPE por las siglas del inglés Convective Available Potential Energy)  indica el valor de energía disponible para el ascenso conforme la parcela (la parcela es una porción de un cuadrado para la protección  de los instrumentos al aire  y también en el está integrado un abrigo meteorológico)acelera hacia arriba. La CAPE se expresa en julios por kilogramo (J/kg).
+ 
+ A continucación se presentan gráficas de la CAPE con los datos mostrados anteriormente.
+ 
+ 
+\begin{figure}[H]
+ \centering
+  \subfloat[Histograma]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{histcape}}
+  \subfloat[Diagrama de caja]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{cajacape}}
+    \caption{Datos 12Z}
+\end{figure}
+ 
+\begin{figure}[H]
+ \centering
+  \subfloat[Histograma]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{histcape00}}
+  \subfloat[Diagrama de caja]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{cajacape00}}
+    \caption{Datos 00Z}
+\end{figure}
+  
+\subsection*{Datos por mes}
+ 
+ 
+ \begin{figure}[H]
+ \centering
+  \subfloat[12Z]{
+   \label{12Z}
+    \includegraphics[width=0.55\textwidth]{capemes}}
+  \subfloat[12Z]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{capemes00}}
+    \caption{Datos 00Z}
+\end{figure}
+  
+ 
+ 
+ 
+ 
+ 
+\newpage
+
+\section*{Agua precipitable}
+El agua precipitable total es la cantidad de vapor de agua integrado en una columna sobre un punto específico en la Tierra. En términos generales, cuanto mayor sea el agua precipitable total, tanta más humedad estará disponible para crear precipitación.
+
+El producto agua precipitable total (Total Precipitable Water, TPW) se utiliza ampliamente para los pronósticos en regiones costeras, porque muestra los ríos atmosféricos que a menudo traen precipitaciones intensas. \\
+A continuación se muestran gráficas de la cantidad de agua precipitable de los datos mencionados anteriormente.
+
+ 
+\begin{figure}[H]
+ \centering
+  \subfloat[Histograma]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{histagua}}
+  \subfloat[Diagrama de caja]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{cajaagua}}
+    \caption{Datos 12Z}
+\end{figure}
+
+ 
+\begin{figure}[H]
+ \centering
+  \subfloat[Histograma]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{histagua00}}
+  \subfloat[Diagrama de caja]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{cajaagua00}}
+    \caption{Datos 00Z}
+\end{figure}
+
+\subsection*{Datos por mes}
+
+
+\begin{figure}[H]
+ \centering
+  \subfloat[00Z]{
+   \label{00Z}
+    \includegraphics[width=0.55\textwidth]{aguames00}}
+  \subfloat[12Z]{
+   \label{12Z}
+    \includegraphics[width=0.55\textwidth]{aguames}}
+    \caption{Datos 00Z}
+\end{figure}
+
+
+
+
+
+%FALTAN LOS DEL MES%
+
+
+
+
+
+% https://www.meted.ucar.edu/mesoprim/tephigram_es/navmenu.php?tab=2&page=5.1.0&type=flash
+
+% http://www.meted.ucar.edu/mesoprim/skewt_es/cape.htm
+
+% https://www.meted.ucar.edu/satmet/npp_es/navmenu.php?tab=1&page=4.5.7&type=text
+
+% http://www.meteoillesbalears.com/?p=623
+
+% http://meteobasica.blogspot.mx/2011/05/interpretacion-de-mapa-de-agua.html
+
+% http://www.tiempo.com/ram/800/curso-sobre-interpretacin-de-mapas-meteorolgicos-el-cape-convective-available-potencial-energy/
+\newpage
+\renewcommand{\refname}{\section*{Bibliografía}}
+\begin{thebibliography}{9}
+\bibitem{a1}, \textsc{\url{https://www.meted.ucar.edu/satmet/npp_es/navmenu.php?tab=1&page=4.5.7&type=text} ,Agua precipitable total. A 13 de Febrero de 2017}
+
+\bibitem{b1}, \textsc{\url{https://www.meted.ucar.edu/mesoprim/tephigram_es/navmenu.php?tab=2&page=5.1.0&type=flash}, Dominio del tefigrama. A 13 de Febrero de 2017}
+
+
+\end{thebibliography}
+
+
+
+
+
+\end{document}
