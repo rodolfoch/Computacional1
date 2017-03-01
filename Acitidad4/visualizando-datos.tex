@@ -1,0 +1,293 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{subfig}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Visualizando datos con Pandas y Matplotlib}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{21 de Febrero del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{unison}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrule 
+\section*{Resumen}
+En este documento se realizan gráficas utilizando la librería de Pandas y la biblioteca de gráficas de Matplotlib, además se genera un tefigrama utilizando la biblioteca de tephi. Los datos utilizados son proporcionados por la Universidad de Wyoming. Dichos datos contienen información sobre  las condiciones atmosféricas de una determinada ciudad.
+\vspace{0.5 cm}
+\hrule
+\vspace{0.9 cm}
+
+\section*{Introducción}
+
+En esta actividad se aprovecha la librería de Pandas para realizar análisis de datos sobre las condiciones amtosféricas de la Ciudad de México del día 21 de Febrero del 2017 a las 12Z, por medio de gráficas generadas con Matplotlib.\\
+Las gráficas contienen información sobre la variación de la temperatura y temperatura de rocío (DWPT) con la altura, además se intenta reproducir el tefigrama que proporciona la Universidad de Wyoming mediante el uso de la biblioteca de tephi en python.
+
+
+
+
+\newpage
+
+
+\section*{\center Parte 1}
+
+Con la ayuda de Python y la biblioteca de gráficas Matplotlib,se exploran visualmente las siguientes gráficas para un lanzamiento a las 12Z del 21 de Febrero de 2017:
+
+\begin{figure}[ht]
+\includegraphics[width=8cm,height=8cm]{presvsalt}
+\centering
+\caption{Presión vs Altura}
+\end{figure}
+
+
+\begin{figure}[H]
+ \centering
+  \subfloat[Temperatura vs Altura]{
+   \label{00Z}
+    \includegraphics[width=0.58\textwidth]{tempvsalt}}
+  \subfloat[Temperatura de rocío (DWPT) vs Altura]{
+   \label{00Z}
+    \includegraphics[width=0.58\textwidth]{dwvsalt}}
+    \caption{Temperaturas}
+\end{figure}
+
+
+
+
+
+
+%\begin{figure}[ht]
+%\includegraphics[width=7cm,height=6cm]{tempvsalt}
+%\centering
+%\caption{Temperatura vs Altura}
+%\end{figure}
+
+
+%\begin{figure}[ht]
+%\includegraphics[width=7cm,height=6cm]{dwvsalt}
+%\centering
+%\caption{DWPT vs Altura}
+%\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=8cm,height=8cm]{emp2}
+\centering
+\caption{Temperatura y Temperatura de rocío}
+\end{figure}
+
+\newpage
+Para generar estas gráficas en python con la biblioteca de gráficas de matplotlib y la librería de pandas para el análisis de datos, se importó lo siguiente:
+
+\begin{verbatim}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as mplt
+import pylab as plt
+from matplotlib import rc
+from pylab import figure, show, legend, xlabel, ylabel
+
+\end{verbatim}
+
+Una vez hecho esto, se importaron los datos con los que se trabajaron para producir los datos. Dichos datos fueron de un sondeo a las 12Z del 21 de Febrero de 2017, proporcionados por la universidad de Wyoming.
+
+Los datos importados tienen un formatato .csv  y se importatont de la siguiente manera:
+
+\begin{verbatim}
+df = pd.read_csv("/UbicaciónDelArchivo/datos.csv" )
+\end{verbatim}
+
+Ya que se importaron los datos, se asignan nombres las columnas para identificarlas haciendo lo siguiente:
+
+\begin{verbatim}
+df.columns= ['encabezado1,ebcabezado2,...,nencabezado']
+\end{verbatim}
+
+Y es posible visualizar las tablas de los datos, con algún número deseado de datos, por ejemplo pedir que muestre 20 renglones:
+
+\begin{verbatim}
+df.head(20)     
+\end{verbatim}
+
+Al hacer esto sólo muestra en la tabla 20 datos pero al momento de trabajar con los datos se utilizan todos los que vienen en el archivo. 
+\begin{figure}[ht]
+\includegraphics[width=11cm,height=11cm]{tabla}
+\centering
+\caption{Tabla de los datos}
+\end{figure}
+
+\newpage
+
+Ahora, para graficar se utiliza el código siguiente:
+
+Se asignan los ejes las columnas que se graficarán
+\begin{verbatim}
+x=df[u'Altura']
+y=df[u'Presión']
+\end{verbatim}
+
+Y luego
+\begin{verbatim}
+mplt.plot(x,y)
+mplt.grid(True)
+plt.xlabel('Presión (hPa)')   (es para nombrar a los ejes)
+plt.ylabel('Altura (m)')
+
+plt.show()           (para que muestre la gráfica)
+
+\end{verbatim}
+
+Haciendo esto se produce la Figura 1
+
+
+Para empalmar gráficas se insertan los comandos para hacer una gráfica sin pedir que la muestre (plt.show()) seguida de la otra y pedir que lo muestre. \\
+Por ejemplo, para generar la Figura 3 se utilizó lo siguiente:
+
+\begin{verbatim}
+
+Figura 2(a) :
+
+x=df[u'Temperatura']
+y=df[u'Altura']
+
+mplt.plot(x,y)
+mplt.grid(True)
+plt.xlabel('Temperatura y Temperatura de Rocío')
+plt.ylabel('Altura (m)')
+
+
+
+
+Figura 2(b) :
+
+x=df[u'DWPT']
+y=df[u'Altura']
+
+mplt.plot(x,y)
+mplt.grid(True)
+
+plt.show()
+\end{verbatim}
+
+\newpage
+\section*{\center Parte 2}
+
+%https://www.meted.ucar.edu/mesoprim/tephigram_es/table_of_contents.htm
+
+En esta actividad se intenta realizar un tefigrama similar con los mismos datos del sitio de wyoming utilizando la biblioteca de tephi en python
+
+
+El tefigrama es un diagrama termodinámico empleado para trazar perfiles verticales de temperatura, humedad y viento atmosféricos. Hace décadas que el tefigrama se utiliza para evaluar una amplia gama de condiciones meteorológicas, principalmente en lo que se refiere a la estabilidad atmosférica. \\
+
+A continuación se presenta un tefigrama a las 12Z del 21 de Febrero de 2017 del sitio de la universidad de Wyioming
+
+
+\begin{figure}[ht]
+\includegraphics[width=9cm,height=9cm]{tefibueno}
+\centering
+\caption{Tefigrama}
+\end{figure}
+
+
+Para generar el tefimagrama, desde el repositorio en Github se realizó un Fork del repositorio tephi.
+Una vez hecho esto, hay que crear una carpeta y abrir una terminal en esa carpeta. \\Luego hay que clonar el repositorio de tephi en Github utilizando el comando: 
+
+\begin{verbatim}
+git clone https://github.com/username/tephi.git
+\end{verbatim}
+
+Posteriormente hay que instalar la biblioteca de tephi utilizando en la terminal el comando:
+
+\begin{verbatim}
+pip install --user /home/rodolfoch/Computacional/actividad4/tephi
+\end{verbatim}
+
+Cuando ya se tenga instalada la biblioteca tephi, ya es posible generar un tefigrama en python .
+
+Para realizar el tefigrama se crearon dos archivos: uno que contiene los datos de la presión y temperatura y el otro de la presión y temperatura de rocío.
+
+En python, se introdujo lo siguiente para generar el tephigrama 
+
+\begin{verbatim}
+import os.path 
+import tephi as tephi
+dew_point = pd.read_csv("/home/rodolfoch/Computacional/actividad4/datos/teph1.csv", names=["PRES", "TEMP"])
+dew_point = pd.read_csv("/home/rodolfoch/Computacional/actividad4/datos/teph2.csv", names=["PRES", "DWPT"])
+tpg = tephi.Tephigram()
+tpg.plot(dew_point)
+tpg.plot(dry_bulb)
+plt.show()
+\end{verbatim}
+Y finalmente, se obtuvo la siguiente gráfica 
+\begin{figure}[ht]
+\includegraphics[width=9cm,height=9cm]{tephi}
+\centering
+\caption{Tefigrama}
+\end{figure}
+
+\newpage
+
+\renewcommand{\refname}{\section*{Bibliografía}}
+\begin{thebibliography}{9}
+\bibitem{a1}, \textsc Universidad de Wyoming {\url{http://weather.uwyo.edu/upperair/sounding.html}}
+
+
+
+\bibitem{c1}, \textsc{Biblioteca de tephi       \url{ https://github.com/username/tephi.git}}
+
+\bibitem{k1}, \textsc Dominio del tefigrama {\url{https://www.meted.ucar.edu/mesoprim/tephigram_es/navmenu.php?tab=1&page=1.0.0&type=flash}}
+
+
+\end{thebibliography}
+
+\end{document}
