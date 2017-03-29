@@ -1,0 +1,293 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Mareas}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{14 de Marzo del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logouni}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\hrule 
+\section*{Resumen}
+El presente texto es una síntesís del artículo "Tide" del sitio de Wikipedia, en donde se habla acerca de las características de las mareas, su física, y otros aspectos de las mareas. Además se presentan unas gráficas del comportamiento de las mareas de la ciudad de Huatulco, Oaxaca y de la ciudad Santa Barbara, California.
+\vspace{0.5 cm}
+\hrule
+\vspace{0.9 cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Introducción}
+El estudio de las mareas ha sido de gran importancia para el ser humano, ya que su estudio de  ha tenido como consecuencia el poder realizar predicciones de como será su comportamiento, lo cual es de interés por ejemplo, al momento de navegar por el oceano. \\
+En este texto se habla sobre qué son las mareas, qué tipos de mareas existen y algunas de sus características más importantes. También se habla sobre la física de las mareas; se habla sobre la relación que existe entre la atracción gravitacional de la Luna y el Sol con Tierra y su relación con las mareas. \\
+Además en este texto se presentan gráficas sobre el comportamiento de las mareas de dos ciudades, de ciudad Huatulco, Oaxaca, y de la ciudad Santa Barbara, California. Las gráficas se realizaron con datos brindados por el sitio de "Tides and Currents-NOAA" para Santa Barbara y el sitio "CICESE" para Huatulco. 
+
+
+
+\newpage
+\section*{Mareas}
+
+La marea es el cambio periódico del nivel del mar producido principalmente por las fuerzas de atracción gravitatoria que ejercen el Sol y la Luna sobre la Tierra.
+
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=8cm,angle=0]{OceanTides1}
+\centering
+
+\end{figure}
+
+% http://www.sitons.com/articles/understanding-tides-basic-guide-open-water-sit-kayakers/
+
+Los tiempos y la amplitud de las mareas en cualquier localidad determinada están influenciados por la alineación del Sol y la Luna, por el patrón de las mareas en el océano profundo, por los sistemas anfidrómicos (amplitud de marea cero) de los océanos y la forma de la costa y la batimetría cercana a la costa. Algunas costas experimentan una marea semidiurna, dos mareas altas y bajas casi iguales cada día. Otras localidades experimentan una marea diurna, sólo una marea alta y baja cada día. Una "marea mixta" ,dos mareas irregulares al día, o una alta y otra baja también es posible.
+
+
+Las mareas varían en escalas de tiempo que van desde horas hasta años debido a una serie de factores.
+
+
+Otros fenómenos ocasionales, como los vientos, las lluvias, el desborde de ríos y los tsunamis provocan variaciones del nivel del mar, también ocasionales, pero no pueden ser calificados de mareas, porque no están causados por la fuerza gravitatoria ni tienen periodicidad
+
+\section*{Definiciones}
+.
+\begin{figure}[ht]
+\includegraphics[width=16cm,height=6.9cm,angle=0]{Tide_terms}
+\centering
+
+\end{figure}
+
+\begin{itemize}
+\item\textbf{Marea astronómica más alta(Highest Astronomical Tide: HAT)}\\
+La marea más alta que se puede predecir que ocurra. Las condiciones meteorológicas pueden agregar altura adicional al HAT
+
+\item\textbf{ Mean High Water Springs:MHWS} \\
+El promedio de las dos mareas altas en los días de las mareas de primavera.
+
+\item\textbf{ Mean High Water Neaps (MHWN)}\\
+El promedio de las dos mareas altas en los días de marea muerta.
+
+\item \textbf{Mean Sea Level (MSL)} \\
+Este es el nivel medio del mar. El MSL es constante para cualquier localización durante un período largo
+
+\item \textbf{Mean Low Water Neaps (MLWN)} \\
+El promedio de las dos mareas bajas en los días de marea muerta.
+
+\item \textbf{Mean Low Water Springs (MLWS)} \\
+El promedio de las dos mareas bajas en los días de las mareas de primavera.
+
+
+\item\textbf{ Lowest Astronomical Tide (LAT) and Chart Datum (CD)} \\
+La marea más baja que se puede predecir que ocurra. Las cartas modernas utilizan esto como el datum de la carta.Bajo ciertas condiciones meteorológicas el agua puede caer más bajo que esto significa que hay menos agua que se muestra en los gráficos.
+
+\end{itemize}
+
+
+
+\section*{Constituyentes de las mareas}
+
+Los constituyentes de las mareas son el resultado neto de múltiples influencias que afectan los cambios de las mareas durante ciertos periodos de tiempo. Los componentes primarios incluyen la rotación de la Tierra, la posición de la Luna y el Sol en relación con la Tierra, la altitud de la Luna (elevación) sobre el ecuador de la Tierra y la batimetría(la batimetría es el estudio de las profundidades marinas, de la tercera dimensión de los fondos lacustres o marinos). Las variaciones con períodos de menos de medio día se llaman constituyentes armónicos. Por el contrario, los ciclos de días, meses o años se denominan constituyentes de largo período.
+
+
+
+
+\subsubsection*{Principal constituyente lunar semidiurna}
+Su período es de aproximadamente 12 horas y 25,2 minutos, exactamente la mitad de un día lunar de las mareas , que es el promedio de tiempo que separa un lunar cenit de la siguiente, y así es el tiempo requerido para la Tierra en dar una vuelta con relación a la Luna. 
+
+\subsection*{Variación de rango}
+La rango semidiurno (la diferencia de altura entre pleamar y bajamar durante aproximadamente medio día) varía en un ciclo de dos semanas. Aproximadamente dos veces al mes, alrededor de la luna nueva y la luna llena , cuando el Sol, la Luna y la Tierra forman una línea. El rango de la marea está entonces en su máximo; esto se llama la marea viva 
+
+
+
+Cuando la Luna está en el primer trimestre o tercer trimestre, el sol y la luna están separados por 90 ° cuando se ve desde la Tierra, y la fuerza de la marea cancela parcialmente la de  luna de. En estos puntos en el ciclo lunar, el rango de la marea está en su mínimo; esto se llama la marea muerta.
+
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=8cm,angle=0]{Mareas-3}
+\centering
+\caption{Marea vivia y marea muerta}
+\end{figure}
+\newpage
+\subsubsection*{Altitud lunar}
+
+La distancia cambiante que separa la Luna y la Tierra también afecta las alturas de las mareas. 
+Cuando la Luna está más cerca, en el perigeo, la altura aumenta, y cuando está en el apogeo, la altura se encoge.
+
+Cada 7 1/2 lunaciones (los ciclos completos de luna llena a nueva a llena), el perigeo coincide con una luna nueva o llena causando las mareas de primavera perigean con el rango de marea más grande.
+
+
+%\subsection*{Fase y amplitud} PUEDE QUE NO LO PONGA, SE MECNIONA HASTA EL FINAL.
+
+\section*{Física}
+\subsection*{Fuerzas}
+
+La fuerza de marea producida por un objeto masivo 
+%(Luna, de aquí ene adelante) 
+sobre una pequeña partícula situada sobre o en un extenso cuerpo 
+%(Tierra, de aqui en adelante) 
+es la diferencia vectorial entre la fuerza gravitacional ejercida por la Luna sobre la partícula, y la fuerza gravitacional que se ejercería sobre la partícula si estuviera situada en el centro de masa de la Tierra
+
+
+La fuerza gravitacional solar en la Tierra es en promedio 179 veces más fuerte que la lunar, pero debido a que el Sol está en promedio 389 veces más lejos de la Tierra, su gradiente de campo es más débil.
+
+
+La fuerza de la marea solar es 46\% más grande que la lunar. Más precisamente,
+la aceleración de la marea lunar (a lo largo del eje Luna-Tierra, en la superficie de la Tierra) es de aproximadamente $1{.}1\times 10^{-7} g$, mientras que la aceleración de la marea solar (a lo largo del eje Tierra-Sol, a la superficie de la Tierra) es de aproximadamente $0{.}52\times10^{-7} g$,donde g es la aceleración gravitatoria en la superficie de la Tierra
+
+
+\subsection*{Amplitud y tiempo de ciclo}
+
+Dado que las órbitas de la Tierra alrededor del sol, y la luna alrededor de la Tierra, son elípticas,las amplitudes de las mareas cambian como resultado de las diferentes distancias Tierra-Sol y Tierra-Luna. Esto provoca una variación en la fuerza de marea y amplitud teórica de aproximadamente ± 18\% para la luna y ± 5\% para el sol . Si tanto el sol como la luna estaban en sus posiciones más cercanas y alineados en la luna nueva,la amplitud teórica alcanzaría 93 centímetros (37 pulgadas).
+
+
+
+
+Las amplitudes reales difieren considerablemente, no sólo por las variaciones de profundidad y obstáculos continentales,sino también porque la propagación de ondas a través del océano tiene un período natural del mismo orden de magnitud que el período de rotación.
+
+Si no hubiera masas de tierra, se necesitaría alrededor de 30 horas para que una onda superficial de longitud de onda larga se propagara a lo largo del ecuador a mitad de camino alrededor de la Tierra (en comparación,la litosfera de la Tierra tiene un período natural de unos 57 minutos).
+Las mareas de tierra, que suben y bajan el fondo del océano, y la propia atracción gravitacional de la marea, son importantes y complican aún más la respuesta del océano a las fuerzas de las mareas.
+
+\subsection*{Disipación}
+
+Las oscilaciones de las mareas de la Tierra introducen la disipación a una velocidad promedio de unos 3.75 terawatts.Aproximadamente el 98\% de esta disipación es por movimiento marino.\\ La disipación surge cuando los flujos de marea a escala de cuenca fluyen a flujos de menor escala que experimentan una disipación turbulenta. Esta resistencia de la marea crea un momento de torsión en la luna que transfiere gradualmente el momento angular a su órbita y un aumento gradual en la separación Tierra-Luna. El momento de torsión igual y opuesto en la Tierra disminuye correspondientemente su velocidad de rotación. Así, durante el tiempo geológico, la luna retrocede de la Tierra, a unos 3,8 centímetros (1,5 pulgadas) / año, alargando el día terrestre.La duración del día ha aumentado en aproximadamente 2 horas en los últimos 600 millones de años.
+
+Suponiendo (como una aproximación aproximada) que la tasa de desaceleración ha sido constante,Esto implicaría que hace 70 millones de años, Día de duración fue del orden del 1\% más corto con unos 4 días más por año.
+
+
+\subsection*{Componentes de las mareas (tabla)}
+Los constituyentes de las mareas se combinan para dar un agregado que varía sin fin debido a sus diferentes e inconmensurables frecuencias
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+
+\hline 
+Orden & Nombre & Símbolo & Periodo(hr) \\
+\hline \hline
+1 & Principal lunar semidiurno (SD) & $M_{2}$ & 12.4206012\\ \hline
+2 & Principal solar semidiurno (SD) & $S_{2}$ & 12 \\ \hline
+3  & Lunar elíptico semidiurno (SD) & $N_{2}$ &12.65834751 \\ \hline
+4 & Lunar diurno (D) & $K_{1}$ & 23.93447213 \\ \hline
+5 & Aguas profundas de principal lunar (HH) & $M_{4}$ & 6.210300601 \\ \hline
+6 & Lunar diurno (D) & $O_{1}$ & 25.81933871 \\ \hline
+7 & Aguas profundas de principal lunar (HH) & $M_{7}$ & 4.140200401 \\ \hline
+8 & Aguas poco profundas terdiurno (HH) & $MK_{3}$ &8.177140247 \\ \hline
+9 & Aguas poco profundas de principal solar (HH) & $S_{4}$ & 6 \\ \hline
+10 & Aguas poco profundas cuarto diruno (HH) & $MN_{4}$ & 6.269173724 	 \\ \hline
+
+
+
+\end{tabular}
+
+\end{center}
+\end{table}
+
+SD: Semidiurno
+
+D: Diurno
+
+
+HH:Armónicos más altos
+
+\newpage
+\section*{Ejemplo de comportamiento de mareas}
+
+En esta sección se presentan dos ejemplos de cómo se comportan las mareas. Dichas gráficas contienen información sobre como se comportaba la altura de las mareas para la ciudad de Huatulco Oaxaca y la ciudad de Santa Barbara, California.\\ 
+Las gráficas se generaron a aprtir de los datos brindados por "CICESE" para Huatulco y por el sitio "Tides and Currents-NOAA". Estas gráficas se generaron en Python haciendo uso de la biblioteca de Matplotlib.
+
+\begin{figure}[ht]
+\includegraphics[width=15cm,height=7.5cm,angle=0]{mareashuatu}
+\centering
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=15cm,height=7.5cm,angle=0]{mareastb}
+\centering
+\end{figure}
+
+\newpage 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\newpage
+
+
+\begin{thebibliography}{}
+
+\bibitem{NOAA} \textsc{NOAA}
+\textit{Tides and currents}, https://tidesandcurrents.noaa.gov/waterlevels.html?id=9410660 
+
+\bibitem{CICESE} \textsc{CICESE}
+\textit{Calendario de mareas}, http://predmar.cicese.mx/calendarios/
+
+
+\bibitem{Tide} \textsc{Wikipedia}
+\textit{Tides}, A 4 de Marzo del 2017, https://en.wikipedia.org/wiki/Tide a \today
+
+
+\bibitem{Theory} \textsc{Wikipedia},
+\textit{Teoría de las mareas}, A 4 de Marzo del 2017, https://en.wikipedia.org/wiki/Theory\_of\_tides 
+
+
+\end{thebibliography}
+
+
+
+
+
+
+
+
+
+\end{document}
