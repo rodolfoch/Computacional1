@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Análisis Armónico de Mareas}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{13 de Abril del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logouni}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage
+\hrule 
+\section*{Resumen}
+En este texto se presentan gráficamente las principales componentes de mareas para la ciudad de Huatulco, Oaxaca
+y Santa Barbara, California. Los datos analizados son de Mayo a Junio del 2016 para Santa Barbara y de Mayo a Agosto del 2016 para Huatulco. El análisis se realiza mediante la transformada discreta de Fourier.
+\vspace{0.5 cm}
+\hrule
+\vspace{0.9 cm}
+
+
+\section*{Introducción}
+El uso de la transformada discreta de Fourier es bastante útil e importante para analizar el comportamiento de las mareas.
+En esta actividad se presentan gráficas sobre las principales componentes de las mareas de dos ciudades: la ciudad Huatulco, Oaxaca, y  la ciudad Santa Barbara, California. Además se muestra cómo utilizar la Transformada Discreta de Fourier desarrollada en Python para transformar los datos de marea haciendo uso del paquete fftpack de SciPy. \\
+Los datos utilizados son brindados por el sitio de "Tides and Currents-NOAA" para Santa Barbara y el sitio "CICESE" para Huatulco.
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+
+\section*{Huatulco, Oaxaca}
+Del sitio de CICESE se descargaron los datos de las alturas de las mareas del año 2016. Dichos datos se importaron en python: 
+
+\begin{figure}[ht]
+\includegraphics[width=7cm,height=3cm]{tabhua1}
+\centering
+\end{figure}
+
+
+De los cuales se le modificó  el formato de la altura y el año para poder tratar y operar con esos datos, y se hizo con:
+
+
+\begin{verbatim}
+#para pasar la altura de object a float:
+df['Altura(mm)']= pd.to_numeric(df['Altura(mm)'], errors='coerce') 
+
+#para cambiar el formato de la fecha:
+from datetime import datetime
+df['Fecha']= df.apply(lambda x:datetime.strptime("{0} {1} {2} {3}".format(x[u'Año']
+,x[u'Mes'], x[u'Día'], x[u'Hora(utc)']), "%Y %m %d %H"),axis=1)
+
+\end{verbatim}
+
+Una vez hecho esto los datos ya se encuentran en las condiciones adecuadas para aplicarle la transformada de fourier:
+
+\begin{figure}[ht]
+\includegraphics[width=7cm,height=3cm]{tabhua2}
+\centering
+\end{figure}
+
+
+Posteriormente se filtró un conjunto de datos, de aproximadamente 3 meses haciendo lo siguiente:
+
+\begin{verbatim}
+#intervalo de fechas
+df_new = df[(df['Fecha'] > '2016-05-06 01:00:00') & (df['Fecha'] 
+<= '2016-08-22 06:00:00')] 
+\end{verbatim}
+
+
+Una vez hecho todo lo anterior se aplicó la transformada de fourier haciendo uso del paquete \textbf{fftpack} de SciPy de la siguiente manera:
+
+
+\begin{verbatim}
+from scipy.fftpack import fft, fftfreq, fftshift
+# number of signal points
+N = 2597 #numero de datos
+# sample spacing
+T = 1.0 #Periodo de un día
+y=df_new[u'Altura(mm)']
+x=df_new[u'Fecha']
+yf = fft(y)
+xf = fftfreq(N, T)
+xf = fftshift(xf)
+yplot = fftshift(yf)
+import matplotlib.pyplot as plt
+plt.plot(xf, 1.0/N * np.abs(yplot))
+plt.xlim(-0.1,0.1)
+plt.grid()
+plt.show()
+\end{verbatim}
+
+La gráfica que se obtuvo fue la siguiente:
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=10cm]{huab2}
+\centering
+\end{figure}
+
+\newpage 
+
+
+Luego se identeificaron los modos correspondientes de la tabla de los constituyentes de la mareas : 
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+
+\hline 
+Orden & Nombre & Símbolo & Periodo(hr) \\
+\hline \hline
+1 & Principal lunar semidiurno (SD) & $M_{2}$ & 12.4206012\\ \hline
+2 & Principal solar semidiurno (SD) & $S_{2}$ & 12 \\ \hline
+3  & Lunar elíptico semidiurno (SD) & $N_{2}$ &12.65834751 \\ \hline
+4 & Lunar diurno (D) & $K_{1}$ & 23.93447213 \\ \hline
+5 & Aguas profundas de principal lunar (HH) & $M_{4}$ & 6.210300601 \\ \hline
+6 & Lunar diurno (D) & $O_{1}$ & 25.81933871 \\ \hline
+7 & Aguas profundas de principal lunar (HH) & $M_{7}$ & 4.140200401 \\ \hline
+8 & Aguas poco profundas terdiurno (HH) & $MK_{3}$ &8.177140247 \\ \hline
+9 & Aguas poco profundas de principal solar (HH) & $S_{4}$ & 6 \\ \hline
+10 & Aguas poco profundas cuarto diruno (HH) & $MN_{4}$ & 6.269173724 	 \\ \hline
+
+
+
+\end{tabular}
+
+\end{center}
+\end{table}
+
+\begin{figure}[ht]
+\includegraphics[width=11cm,height=9cm]{huab1}
+\centering
+\end{figure}
+
+Para identificar los modos de la gráfica se calculó el inverso de la freucencia (el periodo en) correspondiente a los picos y finalmnete se obtuvieron los modos de la gráfica de Huatulco
+\newpage 
+
+\section*{Santa Barbara, California}
+Para el caso de Santa Barbara no fue necesario modifcar el formato  de los datos. Además los datos no fueron filtrados ya que se descargaron específicamente dos meses del sitio NOAA.
+
+El procedimiento para generar la gráfica es análogo al utilizado para Huatulco. Dicha gráfica es 
+
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=10cm]{stbb1}
+\centering
+\end{figure}
+\newpage
+Y sus modos son
+
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=10cm]{stbb2}
+\centering
+\end{figure}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage 
+\renewcommand{\refname}{\section*{Bibliografía}}
+\begin{thebibliography}{9}
+
+\bibitem{NOAA} \textsc{NOAA}
+\textit{Tides and currents}, https://tidesandcurrents.noaa.gov/waterlevels.html?id=9410660 
+
+\bibitem{CICESE} \textsc{CICESE}
+\textit{Calendario de mareas}, http://predmar.cicese.mx/calendarios/
+
+
+\bibitem{Tide} \textsc{Wikipedia}
+\textit{Tides}, A 4 de Marzo del 2017, https://en.wikipedia.org/wiki/Tide a 
+
+\bibitem{transformada} \textsc{fftpack}
+\textit{Transformada discreta de Fourier}, https://docs.scipy.org/doc/scipy-0.18.1/reference/tutorial/fftpack.html
+
+
+
+
+
+
+
+
+
+
+
+\end{thebibliography}
+\end{document}
