@@ -1,0 +1,144 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Evaluación 2: El ciclo de actividad magnética Solar.}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{26 de Abril del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logouni}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+A un conjunto de datos que contienen el número promedio de manchas solares por mes desde el año 1749 a la fecha, se  le generó una  transformada discreta de Fourier con el fin de encontrar la frecuencia del ciclo principal y poder mostrar los principales modos.\\ 
+La gráfica que se obtuvo fue la siguiente:
+
+\begin{figure}[ht]
+\includegraphics[width=15cm,height=10cm]{dos}
+\centering
+\end{figure}
+
+
+
+
+
+\newpage 
+Y se identificaron los siguientes modos principales:
+
+\begin{figure}[ht]
+\includegraphics[width=15cm,height=10cm]{uno}
+\caption{Principales modos}
+\centering
+\end{figure}
+
+Donde a los puntos A,B C y D les corresponde un periodo de aproximadamente 11 años, el cual corresponde al cilo de actividad magnética solar que tiene un periodo regular principal de 11 años aproximadamente.\\
+Los periodos encontrados fueron:\\
+
+A= 11.15 años\\
+B= 10.71 años \\
+C= 9.91 años \\
+D= 11.64 años
+
+Estos datos se encontraban en meses y se transformaron a unidades de año dividiendo por 12 meses a los periodos obtenidos con el código utilizado en jupyter.\\
+
+\newpage 
+
+\subsection*{Indicaciones}
+
+\begin{enumerate}
+
+\item De los datos proporcionados, utiliza una transformada discreta de Fourier, para encontrar la frecuencia del ciclo principal. Muestra una gráfica con los principales modos encontrados.  
+
+Ver la Figura 1.
+
+\item ¿Encuentras un solo ciclo principal o un conjunto de ciclos con frecuencia cercana? ¿Cuál sería el promedio del conjunto de frecuencias?
+
+Se encontraron 4 ciclos con frecuencia cercana (los puntos A,B,C y D), a los cuales les corresponde un promedio de 10.85 años.
+
+
+
+\item ¿Que otros ciclos relevantes encuentras? Proporciona una tabla con las amplitudes de los ciclos. 
+
+Los ciclos relevantes son los puntos A,B,C y D
+
+\begin{table}[htbp]
+\begin{center}
+\begin{tabular}{|l|l|l|l|}
+
+\hline 
+Modos & Amplitud & frecuencia & Periodo(años) \\
+\hline \hline
+A & 39.9872332086 & 0.00746965452848 & 11.15\\ \hline
+B & 35.4198320032 & 0.00778089013383 & 10.71 \\ \hline
+C  & 30.9080378809 & 0.00840336134454 & 9.91 \\ \hline
+D & 22.6781521056 &  0.00715841892312 & 11.64 \\ \hline
+
+
+\end{tabular}
+
+\end{center}
+\end{table}
+
+
+
+
+\item Lo que han encontrado hasta ahora son ciertas regularidades, incluso hay pronósticos de un rango para el número de manchas solares. ¿Cómo crees que es posible predecir el número de manchas?
+
+Es posible predecir aproximadamente el número de manchas con alguna función de Senos o Cosenos observando las regularidades que tiene el fenómeno. Esto es de manera similar a la actividad 7, en la cual se construía una gráfica que aproximaba al comportamiento real del fenómeno a partir de los modos obtenidos de un conjunto de datos.
+
+\end{enumerate}
+
+\end{document}
