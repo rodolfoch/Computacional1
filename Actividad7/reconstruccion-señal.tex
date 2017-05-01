@@ -1,0 +1,331 @@
+\documentclass[12pt]{article}
+\usepackage[spanish]{babel}
+%\usepackage{natbib}
+\usepackage{url}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{parskip}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage[usenames]{color}
+\setmarginsrb{3 cm}{2.5 cm}{3 cm}{2.5 cm}{1 cm}{1.5 cm}{1 cm}{1.5 cm}
+
+\title{Reconstruyendo la señal}		% Título
+\author{\centering Moreno Chávez Jesús Rodolfo}											% Autores
+\date{30 de Abril del 2017} %Aquí pueden cambiarla%					% Fecha de edición
+
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\let\thedate\@date										
+\makeatother
+
+%% Para que salga el título en todas las hojas
+%\pagestyle{fancy}
+%\fancyhf{}
+%\lhead{\thetitle}
+%\cfoot{\thepage}
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{titlepage}
+	\centering
+    \vspace*{0.5 cm}
+    \includegraphics[scale = 0.5]{logouni}\\[0.5 cm]	% University Logo
+    \textsc{\Large Universidad de Sonora}\\[1.0 cm]	% University Name
+	\textsc{\Large División de Ciencias Exactas y Naturales}\\[0.5 cm]				% Course Code
+	\textsc{\large Física computacional I}\\[0.5 cm]				% Course Name
+	\rule{\linewidth}{0.2 mm} \\[0.4 cm]
+	{ \huge \bfseries \thetitle}\\
+	\rule{\linewidth}{0.2 mm} \\[0.5 cm]
+	
+	\begin{minipage}{\textwidth}
+		\begin{flushleft} 
+			\emph{\Large} \large \\
+			\theauthor
+			\end{flushleft}
+	
+		\begin{flushleft} 
+			\emph{\Large Profesor:} \large \centering Carlos Lizárraga Celaya 	
+			\end{flushleft}
+	\end{minipage}\\[1 cm]
+	{\large \thedate}\\[2 cm]
+ 
+	\vfill
+	
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+\newpage 
+\hrule 
+\section*{Resumen}
+El presente texto contiene el procedimiento para reconstruír una señal de marea a aprtir de los modos obtenidos al realizar una transoformada de Fourier a un conjunto de datos . 
+\vspace{0.5 cm}
+\hrule
+\vspace{0.9 cm}
+
+
+\section*{Introducción}
+
+En la práctica 6 encontramos los principales constituyentes de las mareas de dos ciudades, recurriendo a la biblioteca de SciPy fftpack, utilizando la Transformada de Fourier Discreta (DFT). El objetivo de esta práctica es utilizar la información obtenida de la DFT para construír una función que nos permita generar una  gráfica del comportamiento de las mareas, así como la que se mostró en la práctica 5.\\
+En este texto se mostrará el cógido empleado para la reconstrucción y se mostrarán los resultados obtenidos, es decir, se mostrarán las gráficas de la reconstrucción comparadas con las gráficas originales del comportamiento de las mareas, así como el error de la aproximación.\\
+Para esta práctica nuevamente son utilizados los datos del sitio de "CICESE" para la ciudad de Huatulco, Oaxaca y el sitio de "Tides and Currents-NOAA" para Santa Barbara, Californio.
+
+
+
+%(%para la ciudad de Huatulco, Oaxaca y para Santa Barbara,California), 
+
+%De manera similar a la práctica 6, encontramos los modos naturales de la marea. Se obtuvieron las amplitudes de las frecuencias naturales de la marea de los mencionados sitios.\\
+%Para ello  recurrimos a la biblioteca de SciPy fftpack, utilizando la Transformada de Fourier Discreta (DFT).
+
+
+\newpage 
+
+
+\section*{Reconstrucción de marea de Huatulco, Oaxaca}
+%En esta práctica utilizaremos los modos encontrados para reconstruír la señal de marea con los valores obtenidos de la DFT.
+
+
+En la práctica anterior obtuvimos los siguintes modos al utilizar la transformada de Fourier discreta, usando el siguiente código
+
+\begin{verbatim}
+from scipy.fftpack import fft, fftfreq, fftshift
+import numpy as np
+# numero de datos
+N = 2597
+# Separacion de tiempo entre cada medicion
+T = 1.0
+
+#aplicacion de la transformada de fourier a los datos
+y = df[u"Altura(mm)"]
+yf = fft(y)
+ #Cambio de variable de tiempo a uno de frecuencias.
+xf = fftfreq(N, T)
+xf = fftshift(xf)
+# Conjunto de datos dados por la transformada de fourier para graficar
+yplot = fftshift(yf)
+\end{verbatim}
+
+\newpage 
+Y obtuvimos lo siguinte:
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=8cm,angle=0]{huatDFT}
+\centering
+\end{figure}
+
+
+Al generar una gráfica con DFT se buscaron los picos más notorios, por ejemplo, para amplitudes mayores a 25mm. Para ello utilizamos el siguiente comando:
+
+\begin{verbatim}
+a = 2*np.absolute(yf)/N
+
+print(np.where(a[:,]>25)) 
+b= a[a[:,]>25]
+b
+\end{verbatim}
+
+y  obtuvimos la siguiente información
+
+
+\begin{verbatim}
+(array([   0,    1,    2,  100,  101,  108,  109,  202,  205,  208,  209,
+        210,  216,  217, 2380, 2381, 2387, 2388, 2389, 2392, 2395, 2488,
+       2489, 2496, 2497, 2595, 2596], dtype=int64),)
+Out[13]:
+array([ 1137.79283789,    59.90169929,    26.06367895,    28.92596781,
+          47.49734193,    82.76279772,    49.69035015,    25.71511853,
+         102.37608803,    35.97289977,   463.70108706,    44.79733118,
+          45.24414595,    27.11388926,    27.11388926,    45.24414595,
+          44.79733118,   463.70108706,    35.97289977,   102.37608803,
+          25.71511853,    49.69035015,    82.76279772,    47.49734193,
+          28.92596781,    26.06367895,    59.90169929])
+\end{verbatim}
+
+La cual nos da la correspondencia del número de dato y su amplitud correspondiente. Esta información la utilizamos para encontrar con gran precisión más información asociada a la amplitud. \\
+Por ejemplo, el dato 208 tiene asociada la siguiente información  : 
+
+\begin{verbatim}
+#
+print( 'Armonico de prueba')
+print('Amplitud=',2.0*np.absolute(yf[208,]/N))
+print('frecuencia=', xf[int(N/2 +208),])
+print('periodo=', 1/xf[int(N/2 +208),])
+print()
+
+Armonico de prueba
+Amplitud= 35.9728997701
+frecuencia= 0.0800924143242
+periodo= 12.4855769231
+\end{verbatim}
+
+Posteriormente se buscaron las amplitudes, frecuencias y faes para los primeros 13 picos (ya que a paritr de los primeos 13 comenzaban a repetirse ).\\
+Se obtuvieron las amplitudes con el siguiente código:
+
+\begin{verbatim}
+A0 = np.absolute(yf[int(0),]/N)
+A1 = 2.0*np.absolute(yf[int(1),]/N)
+A2 = 2.0*np.absolute(yf[int(2),]/N)
+A3= 2.0*np.absolute(yf[int(100),]/N)
+A4 = 2.0*np.absolute(yf[int(101),]/N)
+A5 = 2.0*np.absolute(yf[int(108),]/N)
+A6 = 2.0*np.absolute(yf[int(109),]/N)
+A7 = 2.0*np.absolute(yf[int(202),]/N)
+A8 = 2.0*np.absolute(yf[int(205),]/N)
+A9 = 2.0*np.absolute(yf[int(208),]/N)
+A10 =  2.0*np.absolute(yf[int(209),]/N)
+A11 = 2.0*np.absolute(yf[int(210),]/N)
+A12 = 2.0*np.absolute(yf[int(216),]/N)
+A13 = 2.0*np.absolute(yf[int(217),]/N)
+\end{verbatim}
+
+Posteriormente se obtuvieron las correspondientes frecuencias haciendo lo siguiente:
+
+
+\begin{verbatim}
+#frecuencias (N/2=1298.5)
+
+fA1 = xf[int(1298.5 +1)]
+fA2 = xf[int(1298.5 +2),]
+fA3 =  xf[int(1298.5 +100),]
+fA4 =  xf[int(1298.5 +101),]
+fA5 =  xf[int(1298.5 +108),]
+fA6 =  xf[int(1298.5 +109),]
+fA7 =  xf[int(1298.5 +202),]
+fA8 =  xf[int(1298.5 +205),]
+fA9 =  xf[int(1298.5 +208),]
+fA10 =  xf[int(1298.5 +209),]
+fA11 =  xf[int(1298.5 +210),]
+fA12 =  xf[int(1298.5 +216),]
+fA13 =  xf[int(1298.5 +217),]
+\end{verbatim}
+
+Y finalmente las correspondientes fases:
+
+\begin{verbatim}
+# Fases 
+FSA1 = np.angle(yf[int(1),])
+FSA2 = np.angle(yf[int(2),])
+FSA0 = np.angle(yf[int(0),])
+FSA1 = np.angle(yf[int(1),])
+FSA2 = np.angle(yf[int(2),])
+FSA3 = np.angle(yf[int(100),])
+FSA4 = np.angle(yf[int(101),])
+FSA5 = np.angle(yf[int(108),])
+FSA6 =  np.angle(yf[int(109),])
+FSA7 =  np.angle(yf[int(202),])
+FSA8 =  np.angle(yf[int(205),])
+FSA9 =  np.angle(yf[int(208),])
+FSA10 =  np.angle(yf[int(209),])
+FSA11 =  np.angle(yf[int(210),])
+FSA12 =  np.angle(yf[int(216),])
+FSA13 =  np.angle(yf[int(217),])
+
+\end{verbatim}
+
+Una vez  obtenidas las amplitudes, frecuencias y fases, podemos hacer uso de esta información para reconstruir la señal por medio de una función de sumas de cosenos 
+
+
+\begin{verbatim}
+#Obteniendo la marea
+w= 2.0*np.pi
+def f(t):
+    return A0 + (A1*np.cos(w*fA1*t+FSA1) + A2*np.cos(w*fA2 *t+FSA2) 
+                   + A3*np.cos(w*fA3*t+FSA3) + A4*np.cos(w*fA4*t +FSA4)
+                   + A5*np.cos(w*fA5*t+FSA5) + A6*np.cos(w*fA6*t +FSA6)
+                   + A7*np.cos(w*fA7*t+FSA7) + A8*np.cos(w*fA8*t+ FSA8)
+                   + A9*np.cos(w*fA9*t+ FSA9) + A10*np.cos(w*fA10*t+ FSA10) 
+                   + A11*np.cos(w*fA11*t+ FSA11) + A12*np.cos(w*fA12*t+ FSA12)
+                   + A13*np.cos(w*fA13*t+ FSA13))
+\end{verbatim}
+
+Al obtener la función que nos permite recosntruír la señal, la graficamos y comparamos con la gráfica original del comportamiento de las mareas. El resultado que se obtuvo es el siguiente:
+
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=8cm,angle=0]{rechuat}
+\centering
+\end{figure}
+
+La reconstrucción de marea obtenida tiene un error de 0.75\%. Dicho error fue calculado mediante le siguiente código:
+
+
+\begin{verbatim}
+# error:
+y_0=df['Altura(mm)']
+y_1=f(df['T'])
+
+E= np.sum(abs(y_0-y_1)**2) / np.sum(np.abs(y_0)**2)
+E
+
+0.007511263079838983
+\end{verbatim}
+
+\section*{Reconstrucción de marea de Santa Barbara, California}
+
+El procedimiento para la reconstrucción de la señal es el mismo que se usó para Huatulco, la única diferencia es que se utilizaron más términos en la función de reconstrucción de la señal.
+
+La reconstrucción obtenida fue la siguiente:
+
+\begin{figure}[ht]
+\includegraphics[width=10cm,height=8cm,angle=0]{recstb}
+\centering
+\end{figure}
+
+El error fue de 1.05\%, el cual es un poco mayor al error obtenido para la reconstrucción de marea de huatulco. Esta diferencia se debe a que para Huatuclo se usaron más datos para la reconstrucción, y por ende la aproximación es mejor.
+
+\newpage 
+
+\renewcommand{\refname}{\section*{Bibliografía}}
+
+\begin{thebibliography}{9}
+
+
+
+\bibitem{NOAA} \textsc{NOAA}
+
+\textit{Tides and currents}, https://tidesandcurrents.noaa.gov/waterlevels.html?id=9410660 
+
+
+
+\bibitem{CICESE} \textsc{CICESE}
+
+\textit{Calendario de mareas}, http://predmar.cicese.mx/calendarios/
+
+
+
+
+
+\bibitem{transformada} \textsc{fftpack}
+
+\textit{Transformada discreta de Fourier}, https://docs.scipy.org/doc/scipy-0.18.1/reference/tutorial/fftpack.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{thebibliography}
+
+\end{document}
